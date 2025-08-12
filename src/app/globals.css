@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@theme {
+  --defaultOrange: #ff5a1f;
+  --defaultGradient: gradient-to-br from-[#FF5A1F] to-[#7A3FFD];
+}
+.defaultGradient {
+  background: linear-gradient(170deg, #ff6b35 0%, #e73c7e 45%, #8b5cf6 130%);
+}
+.defaultGradientHover:hover {
+  background: linear-gradient(170deg, #ff6b35 0%, #e73c7e 45%, #8b5cf6 130%);
+}
