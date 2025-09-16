@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --defaultBlue: #0095ff;
+  --defaultBgColor: #fafafa;
+}
