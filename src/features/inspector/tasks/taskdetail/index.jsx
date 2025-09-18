@@ -22,7 +22,7 @@ const InspectorTaskDetail = () => {
         settype(tab);
     };
     // if (taskDetail?.message === 'No reports found.') return <NoDataFound />
-    console.log(taskDetail?.data?.report, 'taskDetail')
+    // console.log(taskDetail?.data?.report, 'taskDetail')
     return (
         <>
             {isLoading ? (

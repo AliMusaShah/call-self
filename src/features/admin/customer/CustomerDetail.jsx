@@ -4,7 +4,7 @@ import CustomLoader from '../../../components/CustomLoader';
 
 const CustomerDetail = ({ id }) => {
     const { data: customerDetail, isLoading } = useGetCustomerByIdQuery(id)
-    // console.log(customerDetail?.customer?.data, 'customerDetail')
+    // console.log(customerDetail?.customer?.data?.customer_uid, 'customerDetail')
 
 
     return (
@@ -15,6 +15,12 @@ const CustomerDetail = ({ id }) => {
                     <h1 className="text-2xl font-bold text-gray-800">{customerDetail?.customer?.data?.customer_first_name} {customerDetail?.customer?.data?.customer_last_name}</h1>
 
                     <div className="space-y-0">
+                        <div className="flex justify-between py-3 border-b border-gray-200 last:border-b-0"  >
+                            <span className="text-gray-500">Customer ID:</span>
+                            <span className='text-gray-800'>
+                                {customerDetail?.customer?.data?.customer_uid}
+                            </span>
+                        </div>
                         <div className="flex justify-between py-3 border-b border-gray-200 last:border-b-0"  >
                             <span className="text-gray-500">Email:</span>
                             <span className='text-gray-800'>

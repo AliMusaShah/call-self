@@ -3,7 +3,7 @@ import { isImageUrl } from "../../utils/Helper";
 import Card from "./Card";
 
 const BeforeAfterSection = ({ data, children, }) => {
-    console.log(data, ' post pre data');
+    // console.log(data, ' post pre data');
     const { standardInfo } = data
     // console.log(sow, 'sow');
     return (

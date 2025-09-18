@@ -118,7 +118,6 @@ const Customer = () => {
 
                     />
                     <CustomModal isOpen={isModal} title='Customer Details' onClose={handleClose}>
-
                         <CustomerDetail id={currentCustomerId} />
                     </CustomModal>
                 </>

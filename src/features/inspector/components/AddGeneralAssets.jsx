@@ -7,6 +7,15 @@ import { IoClose } from 'react-icons/io5'
 const AddGeneralAssets = () => {
     const { values, setFieldValue } = useFormikContext()
     const [previewFiles, setPreviewFiles] = useState([]);
+    // const [previewFiles, setPreviewFiles] = useState(values?.report?.generalAssetImages.flat().map((file, index) => {
+    //     return {
+    //         id: `file_${index}`, // or generate a unique ID
+    //         type: 'image', // since these are images
+    //         url: URL.createObjectURL(file),
+    //         name: file.name,
+    //         file: file
+    //     };
+    // }));
     // const handleFileChange = (e, name) => {
     //     const files = e.target.files;
     //     if (files && files.length > 0) {
@@ -68,6 +77,24 @@ const AddGeneralAssets = () => {
         // Clear the input
         event.target.value = '';
     };
+    // const  = flat().map(file => {
+    //     if (file instanceof File) {
+    //         return URL.createObjectURL(file);
+
+    //     }
+    //     return file; // In case some are already URLs
+    // });
+    // const flattenedImages = values?.report?.generalAssetImages.flat().map((file, index) => {
+    //     return {
+    //         id: `file_${index}`, // or generate a unique ID
+    //         type: 'image', // since these are images
+    //         url: URL.createObjectURL(file),
+    //         name: file.name,
+    //         file: file
+    //     };
+    // // });
+    // console.log(values?.report?.generalAssetImages, 'values?.report?.generalAssetImages')
+    // console.log(previewFiles, 'previewFiles')
     const removeFile = (fileId) => {
         setPreviewFiles(prev => {
             const fileToRemove = prev.find(f => f.id === fileId);
@@ -75,8 +102,8 @@ const AddGeneralAssets = () => {
 
             if (fileToRemove) {
                 // Update form values
-                const updatedImages = values.findingImages?.filter(file => file !== fileToRemove.file) || [];
-                setFieldValue('findingImages', updatedImages);
+                const updatedImages = values.report.generalAssetImages?.filter(file => file !== fileToRemove.file) || [];
+                setFieldValue('report.generalAssetImages', updatedImages);
 
                 // Revoke object URL for videos to prevent memory leaks
                 if (fileToRemove.type === 'video') {
@@ -91,7 +118,7 @@ const AddGeneralAssets = () => {
 
 
 
-
+    console.log(Date.now())
     return (
         <>
             <FieldArray name={`report.generalAssets`}>
@@ -131,7 +158,6 @@ const AddGeneralAssets = () => {
                                                     </div>
                                                 )}
 
-                                                {/* Remove button */}
                                                 <button
                                                     type="button"
                                                     onClick={() => removeFile(file.id)}
@@ -141,7 +167,6 @@ const AddGeneralAssets = () => {
                                                 </button>
                                             </div>
 
-                                            {/* File name */}
                                             <div className="mt-1 text-xs text-gray-600 truncate">
                                                 {file.name}
                                             </div>
@@ -160,9 +185,10 @@ const AddGeneralAssets = () => {
                                     />
                                     <label className="hover:bg-blue-600 focus:outline-none cursor-pointer p-1 text-2xl text-white text-center bg-[var(--defaultBlue)] rounded-md absolute right-[11%]">
                                         <span><CiCamera /></span>
-                                        <FieldArray name={`report.generalAssetImages`}>
 
-                                            <FastField name={`report.generalAssetImages.${assetIndex}`}>
+
+                                        <FieldArray name={`report.generalAssetImages`}>
+                                            <FastField name={`report.generalAssetImages${assetIndex}`}>
                                                 {() => (
                                                     <input
                                                         type="file"
@@ -172,7 +198,7 @@ const AddGeneralAssets = () => {
                                                         onChange={(e) =>
                                                             handleMultipleFileChange(
                                                                 e,
-                                                                `report.generalAssetImages.${assetIndex}`,
+                                                                `report.generalAssetImages${assetIndex}`,
                                                             )
                                                         }
                                                     />

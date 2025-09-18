@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 const StatusToggle = ({ row, onToggle }) => {
-    const [isToggled, setIsToggled] = useState(row?.status === 'true');
+    const [isToggled, setIsToggled] = useState(row?.status === 'true'
+    );
 
     const handleToggle = async (e) => {
         const isChecked = e.target.checked;
         const newState = isChecked;
-
         setIsToggled(newState);
 
         const payload = {
@@ -17,10 +17,10 @@ const StatusToggle = ({ row, onToggle }) => {
 
         } catch (error) {
             console.error('Error updating status:', error);
-            setIsToggled(!isToggled);
 
         }
     }
+
     return (
         <div className="flex items-center">
             <label className="inline-flex items-center cursor-pointer">

@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import Apartment from "../../assets/Apartment.png";
+import { isImageUrl } from "../../utils/Helper";
 
 // Extracted MeterReading component for reusability
 const MeterReading = ({ label, value, unit = "ppmv" }) => (
@@ -23,9 +24,23 @@ const Question = ({ question, answer, questionNumber }) => (
         <h4 className="text-sm font-semibold text-gray-900 mb-2">
             Question#{questionNumber}: {question}
         </h4>
-        <p className="text-sm text-gray-700 leading-relaxed">
+        {isImageUrl(answer) ? (
+            <img
+                src={answer}
+                alt="Answer image"
+                width={200}
+                height={150}
+
+            />
+        ) : (
+            <p className="text-sm text-gray-700 leading-relaxed ">
+                <span className="font-medium text-gray-800">Answer:</span> {answer}
+            </p>)
+
+        }
+        {/* <p className="text-sm text-gray-700 leading-relaxed">
             <span className="font-medium text-gray-800">Answer:</span> {answer}
-        </p>
+        </p> */}
     </div>
 );
 
@@ -127,6 +142,7 @@ const ReportCard = ({ data, label }) => (
 
 // Main component
 const AdminBeforeAfterTask = ({ preData, postData }) => {
+    // console.log(preData, 'preData')
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-[#F6F6F6]">
             <ReportCard data={preData} label="Before" />

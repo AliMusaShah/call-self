@@ -56,7 +56,7 @@ const Profile = () => {
             formData.append('zipCode', values.zipCode);
             formData.append('image', selectedImage);
             const response = await updateProfile(formData).unwrap()
-            // console.log(response, 'response')
+            // 
             dispatch(updateUser(response))
             toast.success('Profile Updated Successfully')
 

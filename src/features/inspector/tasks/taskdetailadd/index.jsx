@@ -157,130 +157,130 @@ const TaskDetailAdd = () => {
 
     // };
     const handleSubmit = async (values) => {
-        console.log("✅ FormData Values", values);
+        // console.log("✅ FormData Values", values);
 
-        // try {
-        //     const formData = new FormData();
-        //     const processedAreas = values.report?.areas?.map((area, i) => {
-        //         const processedArea = {
-        //             areaType: area.areaType,
-        //             details: area.details?.map(room => ({
-        //                 customName: room.customName,
-        //                 assets: room.assets?.map(asset => ({ name: asset.name })) || []
-        //             })) || []
-        //         };
+        try {
+            const formData = new FormData();
+            const processedAreas = values.report?.areas?.map((area, i) => {
+                const processedArea = {
+                    areaType: area.areaType,
+                    details: area.details?.map(room => ({
+                        customName: room.customName,
+                        assets: room.assets?.map(asset => ({ name: asset.name })) || []
+                    })) || []
+                };
 
-        //         // Handle room images
-        //         area.areaImages?.forEach((image, j) => {
-        //             if (image instanceof File) {
-        //                 formData.append(`areaImages`, image);
-        //             }
-        //         });
+                // Handle room images
+                area.areaImages?.forEach((image, j) => {
+                    if (image instanceof File) {
+                        formData.append(`areaImages`, image);
+                    }
+                });
 
-        //         // Handle asset images
-        //         area.assetImages?.forEach((image, j) => {
-        //             if (image instanceof File) {
-        //                 formData.append(`assetImages`, image);
-        //             }
-        //         });
+                // Handle asset images
+                area.assetImages?.forEach((image, j) => {
+                    if (image instanceof File) {
+                        formData.append(`assetImages`, image);
+                    }
+                });
 
-        //         return processedArea;
-        //     }) || [];
-        //     // Add simple fields
-        //     formData.append("type", values.report?.type || '');
-        //     formData.append("taskId", values.report?.taskId || '');
-        //     formData.append("areas", JSON.stringify(processedAreas));
-        //     // formData.append("file_upload", values.report?.file_upload);
-        //     formData.append("findings", JSON.stringify(values.report?.findings));
-        //     formData.append("selectedScope", JSON.stringify(values.report?.selectedScope));
+                return processedArea;
+            }) || [];
+            // Add simple fields
+            formData.append("type", values.report?.type || '');
+            formData.append("taskId", values.report?.taskId || '');
+            formData.append("areas", JSON.stringify(processedAreas));
+            // formData.append("file_upload", values.report?.file_upload);
+            formData.append("findings", JSON.stringify(values.report?.findings));
+            formData.append("selectedScope", JSON.stringify(values.report?.selectedScope));
 
-        //     formData.append(`generalAssets`, JSON.stringify(values.report?.generalAssets));
+            formData.append(`generalAssets`, JSON.stringify(values.report?.generalAssets));
 
-        //     // Add premisesDetails - only send the ones that are true
-        //     if (values.report?.premisesDetails) {
-        //         if (values.report.premisesDetails.villa) {
-        //             formData.append("premisesDetails[villa]", true);
-        //         }
-        //         if (values.report.premisesDetails.apartment) {
-        //             formData.append("premisesDetails[apartment]", true);
-        //         }
-        //         if (values.report.premisesDetails.office) {
-        //             formData.append("premisesDetails[office]", true);
-        //         }
-        //     }
-        //     // values.report?.findings.forEach((finding, index) => {
-        //     //     formData.append(`findings${index}.image`, finding?.image);
-        //     //     if (finding?.image instanceof File) {
-        //     //         formData.append(`findings${index}.image`, finding?.image);
-        //     //     }
+            // Add premisesDetails - only send the ones that are true
+            if (values.report?.premisesDetails) {
+                if (values.report.premisesDetails.villa) {
+                    formData.append("premisesDetails[villa]", true);
+                }
+                if (values.report.premisesDetails.apartment) {
+                    formData.append("premisesDetails[apartment]", true);
+                }
+                if (values.report.premisesDetails.office) {
+                    formData.append("premisesDetails[office]", true);
+                }
+            }
+            // values.report?.findings.forEach((finding, index) => {
+            //     formData.append(`findings${index}.image`, finding?.image);
+            //     if (finding?.image instanceof File) {
+            //         formData.append(`findings${index}.image`, finding?.image);
+            //     }
 
-        //     // })
-
-
-        //     // Add findings
-        //     // values?.report?.findings?.forEach((finding, index) => {
-        //     //     if (typeof finding === 'object' && finding !== null) {
-        //     //         Object.keys(finding).forEach(key => {
-        //     //             const value = finding[key];
-        //     //             if (value !== null && value !== undefined) {
-        //     //                 formData.append(`findings`, JSON.stringify(value));
-        //     //             }
-        //     //         });
-        //     //     } else if (finding !== null && finding !== undefined) {
-        //     //         formData.append(`findings[${index}]`, JSON.stringify(finding));
-        //     //     }
-        //     // });
-
-        //     // Process areas and collect files separately
+            // })
 
 
-        //     // Convert areas to JSON string before appending
+            // Add findings
+            // values?.report?.findings?.forEach((finding, index) => {
+            //     if (typeof finding === 'object' && finding !== null) {
+            //         Object.keys(finding).forEach(key => {
+            //             const value = finding[key];
+            //             if (value !== null && value !== undefined) {
+            //                 formData.append(`findings`, JSON.stringify(value));
+            //             }
+            //         });
+            //     } else if (finding !== null && finding !== undefined) {
+            //         formData.append(`findings[${index}]`, JSON.stringify(finding));
+            //     }
+            // });
 
-        //     // formData.append(`generalAssetImages`, values.report?.generalAssetImages);
+            // Process areas and collect files separately
 
 
-        //     values?.report?.file_upload?.forEach((img, index) => {
-        //         if (img instanceof File) {
-        //             formData.append(`file_upload`, img);
-        //         }
-        //     });
-        //     values?.report?.findingImages?.forEach((img, index) => {
-        //         if (img instanceof File) {
-        //             formData.append(`findingImages`, img);
-        //         }
-        //     });
-        //     values?.report?.generalAssetImages?.forEach((img, index) => {
-        //         if (img instanceof File) {
-        //             formData.append(`generalAssetImages`, img);
-        //         }
-        //     });
-        //     // values?.report?.generalAssetImages?.forEach(file => formData.append("generalAssetImages", file));
+            // Convert areas to JSON string before appending
 
-        //     // Add other images and videos
-        //     values?.report?.addedImages?.forEach((img, index) => {
-        //         if (img instanceof File) {
-        //             formData.append(`addedImages`, img);
-        //         }
-        //     });
+            // formData.append(`generalAssetImages`, values.report?.generalAssetImages);
 
-        //     values?.report?.addedVideos?.forEach((vid, index) => {
-        //         if (vid instanceof File) {
-        //             formData.append(`addedVideos`, vid);
-        //         }
-        //     });
 
-        //     // Debug: Log all FormData entries
-        //     console.log("FormData entries:");
-        //     for (let [key, value] of formData.entries()) {
-        //         console.log(key, value instanceof File ? `File: ${value.name}` : value);
-        //     }
+            values?.report?.file_upload?.forEach((img, index) => {
+                if (img instanceof File) {
+                    formData.append(`file_upload`, img);
+                }
+            });
+            values?.report?.findingImages?.forEach((img, index) => {
+                if (img instanceof File) {
+                    formData.append(`findingImages`, img);
+                }
+            });
+            values?.report?.generalAssetImages?.forEach((img, index) => {
+                if (img instanceof File) {
+                    formData.append(`generalAssetImages`, img);
+                }
+            });
+            // values?.report?.generalAssetImages?.forEach(file => formData.append("generalAssetImages", file));
 
-        //     await addInspectionReport(formData).unwrap();
-        //     navigate(-1)
-        // } catch (error) {
-        //     console.error("Submission error:", error);
-        //     toast.error(error?.data?.message || 'something went wrong')
-        // }
+            // Add other images and videos
+            values?.report?.addedImages?.forEach((img, index) => {
+                if (img instanceof File) {
+                    formData.append(`addedImages`, img);
+                }
+            });
+
+            values?.report?.addedVideos?.forEach((vid, index) => {
+                if (vid instanceof File) {
+                    formData.append(`addedVideos`, vid);
+                }
+            });
+
+            // Debug: Log all FormData entries
+            console.log("FormData entries:");
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value instanceof File ? `File: ${value.name}` : value);
+            }
+
+            await addInspectionReport(formData).unwrap();
+            navigate(-1)
+        } catch (error) {
+            console.error("Submission error:", error);
+            toast.error(error?.data?.message || 'something went wrong')
+        }
     };
     const handleRadioChange = (selectedValue, setFieldValue) => {
         const updatedPremisesDetails = {

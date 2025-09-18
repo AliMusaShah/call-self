@@ -33,7 +33,6 @@ const LoginPage = () => {
     const handleSubmit = async (values) => {
         try {
             const response = await login(values).unwrap()
-            console.log(response, 'response')
             dispatch(updateUser(response))
             if (response?.data?.user?.role === 'admin') {
                 navigate('/admin-dashboard')

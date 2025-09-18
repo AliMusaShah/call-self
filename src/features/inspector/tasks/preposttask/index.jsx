@@ -50,7 +50,7 @@ const PrePostTask = () => {
         selectedScope: taskDetail?.data?.scopeOfWork || [],
     }
     const handleSubmit = async (values) => {
-        console.log(values, 'values');
+        // console.log(values, 'values');
         try {
             const formData = new FormData();
             formData.append(`taskId`, values?.taskId);
@@ -77,7 +77,7 @@ const PrePostTask = () => {
     }
     if (taskDetail?.message === 'No reports found.') return <NoDataFound />
 
-    console.log(taskDetail?.data, 'taskDetail')
+    // console.log(taskDetail?.data, 'taskDetail')
     return (
         <>
             {isLoading ? (

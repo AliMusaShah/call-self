@@ -18,11 +18,12 @@ import NoDataFound from "../../../components/NoDataFound";
 const Forms = () => {
     const [query, setQuery] = useState('');
     const [timeFrame, setTimeFrame] = useState('Monthly');
+    const [deletingId, setDeletingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const debouncedQuery = useDebounce(query, 500);
     const { data: allInspectionForm, isLoading } = useGetAllInspectionFormQuery({ page: currentPage, limit: 10, title: debouncedQuery, filterBy: timeFrame })
     const [updateInspectionFormStatus] = useUpdateInspectionFormStatusMutation()
-    const [deleteInspectionForm] = useDeleteInspectionFormMutation()
+    const [deleteInspectionForm, { isLoading: deleteLoader }] = useDeleteInspectionFormMutation()
     const [DublicateForm] = useDublicateFormMutation()
     const navigate = useNavigate()
     // const [isModal, setIsModal] = useState(null);
@@ -34,10 +35,13 @@ const Forms = () => {
         navigate('/forms/addnewform', { state: { formId: row?._id } })
     };
     const handleDelete = async (row) => {
+        setDeletingId(row._id);
         try {
             await deleteInspectionForm(row?._id).unwrap()
+            setDeletingId(null);
         } catch (error) {
             console.log(error)
+            setDeletingId(null);
         }
     };
     const handleCopy = async (row) => {
@@ -74,6 +78,7 @@ const Forms = () => {
             header: 'Status',
             render: (row) => (
                 <StatusToggle
+                    key={row?._id}
                     row={row}
                     onToggle={(row, newState) => {
                         // Handle the toggle state change here
@@ -108,8 +113,13 @@ const Forms = () => {
                         className=' rounded-[99px] bg-[#FFF2F2] text-red-500 text-[18px] flex items-center justify-center cursor-pointer hover:shadow-lg'
                         onClick={() => handleDelete(row)}
                     >
-                        <AiOutlineDelete size={22} />
+                        {deletingId === row._id && deleteLoader ? (
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-red-500"></div>
+                        ) : (
+                            <AiOutlineDelete size={22} />
+                        )}
                     </button>)}
+
                     {row?.formType === 'master' &&
                         (
                             <button
@@ -120,11 +130,9 @@ const Forms = () => {
                                 onClick={() => handleCopy(row)}
                             >
                                 <MdContentCopy size={22} />
-                            </button>)
+                            </button>
+                        )
                     }
-
-
-
                 </div>
             ),
 

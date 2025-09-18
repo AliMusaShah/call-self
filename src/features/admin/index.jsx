@@ -31,11 +31,11 @@ const AdminDashboard = () => {
                         <SelectDropdown onChange={handleChange} value={timeFrame} options={Months} />
                     </div>
                     <Cards item={dashboardData?.data} />
-                    <div className='flex justify-between gap-4 p-3 mt-4'>
+                    <div className='grid md:grid-cols-[70%_30%] grid-cols-1 gap-4 p-3 mt-4'>
                         <Analytics analytics={orderAnalytics?.data} />
                         <Certifications data={dashboardCertificates?.data?.certificates} refetch={refetch} isLoading={isFetching} />
                     </div>
-                    <div className='flex justify-between gap-4 p-3 mt-4'>
+                    <div className='grid md:grid-cols-[70%_30%] grid-cols-1 gap-4 p-3 mt-4'>
                         <EnvironmentalQuality />
                         <MoldMapping />
                     </div>

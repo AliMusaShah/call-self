@@ -50,7 +50,7 @@ const Analytics = ({ analytics }) => {
 
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 w-auto md:w-5xl ">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100   ">
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-xl font-semibold text-gray-800">Orders Analytics</h2>
 

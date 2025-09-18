@@ -17,12 +17,12 @@ const UpdatePassword = () => {
     };
 
     const handleSubmit = async (values) => {
-        console.log(values, 'values')
+        // console.log(values, 'values')
         try {
             await updatePassword(values).unwrap()
             toast.success('password updated successfullly')
         } catch (error) {
-            console.log(error?.data?.message)
+            // console.log(error?.data?.message)
             toast.error(error?.data?.message || 'An error occurred while updating the password')
 
         }

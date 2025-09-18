@@ -47,7 +47,7 @@ function SideBar() {
     const menuItems = getMenuItems(role);
     const { pathname } = useLocation();
     return (
-        <div className='h-full bg-[#171616] p-6 md:w-72 shadow-md rounded-lg overflow-y-auto'>
+        <div className='h-full bg-[#171616] p-6 w-full md:w-72 shadow-md rounded-lg overflow-y-auto'>
             <div className="flex items-center justify-start mb-8">
                 <img src={Logo} alt="Company Logo" className="h-12 w-auto" />
             </div>

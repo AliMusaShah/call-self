@@ -6,6 +6,10 @@ import StarRating from "../components/StarRating";
 const CertificateDetail = ({ id }) => {
     const { data: certificateDetial, isLoading } = useGetCertificateByIdQuery(id)
     // console.log(certificateDetial?.data, 'customer_address')
+
+    const fullName = certificateDetial?.data?.customer?.data?.customer_first_name + certificateDetial?.data?.customer?.data?.customer_last_name
+    const address = certificateDetial?.data?.customer?.data?.customer_address?.street + certificateDetial?.data?.customer?.data?.customer_address?.city
+
     return (
         <>
             {isLoading ? <CustomLoader /> : (<div className=" p-6 bg-white rounded-2xl ">
@@ -13,11 +17,11 @@ const CertificateDetail = ({ id }) => {
                 <div className="space-y-2 text-sm text-gray-700">
                     <div className="flex justify-between">
                         <span className="font-medium text-gray-500">Customer:</span>
-                        <span>{certificateDetial?.data?.customer?.data?.customer_first_name} {certificateDetial?.data?.customer?.data?.customer_last_name}</span>
+                        <span>{fullName || "N/A"} </span>
                     </div>
                     <div className="flex justify-between">
                         <span className="font-medium text-gray-500">Address:</span>
-                        <span>{`${certificateDetial?.data?.customer?.data?.customer_address?.street} ${certificateDetial?.data?.customer?.data?.customer_address?.city} `}</span>
+                        <span>{address || 'N/A'}</span>
                     </div>
                     <div className="flex justify-between">
                         <span className="font-medium text-gray-500">Certification Type:</span>
